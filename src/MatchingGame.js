@@ -2,15 +2,20 @@ import { useState, useEffect } from 'react';
 import createDeck from './createDeck.js';
 import Card from './Card.js';
 import React from 'react';
+import ShowStrikes from './ShowStrikes.js';
+import Clock from './Timer.js';
+
+//MatchingGame(gameScore)
 
 export default function MatchingGame(){
 
     const [deck, setDeck] = useState( createDeck() ); 
     const [pairs, setPairs] = useState( 0 );
-    const [strikes, setStrikes] = useState( 0 );
-    const [warning, setWarning] = useState( 'g' );    
+    const [strikes, setStrikes] = useState( 0 );   
     const [guess1, setGuess1] = useState(''); 
     const [guess2, setGuess2] = useState('');
+    const [score, setScore] = useState('');
+    
     
     //shows users the deck for a limited amount of time
     useEffect( ()=> {
@@ -31,32 +36,33 @@ export default function MatchingGame(){
         }))
        }
 
-
+    //uses func to check if selected cards are a match
     useEffect( ()=>{
         if(guess2){
             cardsMatch()
+            stopTimer()
         }
     }, [guess2])
-
+    
     function cardsMatch(){
+        //resets selection and saves number of pairs if match
         if (guess1.cardValue === guess2.cardValue){
-            setWarning('match!')
             setGuess1('')
             setGuess2('')
             setPairs(pairs + 1)
         }
 
         else{
-            setWarning('strike')
             setStrikes(strikes+1)
-            var showPicks = setTimeout( () => flipPicksDown(), 1200 );
+            //lets user see wrong choices for a short time before flipping
+            var showPicks = setTimeout( () => flipPicksDown(), 1400 );
             return function cleanup() {
                 clearTimeout(showPicks);
               };
         }
 }
 
-    //flips a given card up in a deck using .cardID
+    //flips 2 selected cards down in a deck
     function flipPicksDown(){
         setDeck( deck.map((card) =>{
             if(card.cardID === guess1.cardID ||
@@ -72,7 +78,18 @@ export default function MatchingGame(){
     
     }
 
-    function guessSaver(guessInput){
+    //stops timer
+    function stopTimer(){
+        if(strikes >= 2){
+            setScore('lost')
+        }
+        else if(pairs >= 3){
+            setScore('won')
+            }
+    }
+
+    //saves card info upon click 
+    function saveClick(guessInput){
         if (guessInput.isFaceDown){
 
         if(!guess1){
@@ -80,12 +97,11 @@ export default function MatchingGame(){
             guessInput.isFaceDown = false;
             
         }
-        else if(guess1.cardID !== guessInput.cardID){
+        else if(!guess2){
             setGuess2(guessInput)
             guessInput.isFaceDown = false;
         }}
     }
-
 
     let deckDisplay = deck.map(item => {
         if(item.cardValue){
@@ -93,7 +109,7 @@ export default function MatchingGame(){
         <Card key={item.cardID} cardValue={item.cardValue} 
         isFaceDown={item.isFaceDown}
         onClick={()=> {
-             guessSaver(item) 
+             saveClick(item) 
             }}
         />)}
 
@@ -102,10 +118,23 @@ export default function MatchingGame(){
         }
       });
 
-    return (    
-        <div>
-        {deckDisplay}
-        {warning}
+
+      let bread = <Clock stopTimer={score}/>;
+
+    return (
+        <React.Fragment>   
+        <div className='strike-container'>
+        <ShowStrikes strikes={strikes} />
         </div>
+
+        <div className='deck-container'>
+        {deckDisplay }
+        </div>
+
+        <div>
+        {bread}
+        </div>
+
+        </React.Fragment> 
     )
 }

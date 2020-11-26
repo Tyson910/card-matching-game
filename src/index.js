@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Card from './Card'
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <Card cardValue='11h' isFaceDown={true} />
   </React.StrictMode>,
   document.getElementById('root')
 );
