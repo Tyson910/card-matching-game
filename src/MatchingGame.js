@@ -5,8 +5,6 @@ import React from 'react';
 import ShowStrikes from './ShowStrikes.js';
 import Clock from './Timer.js';
 
-//MatchingGame(gameScore)
-
 export default function MatchingGame(){
 
     const [deck, setDeck] = useState( createDeck() ); 
@@ -15,7 +13,7 @@ export default function MatchingGame(){
     const [guess1, setGuess1] = useState(''); 
     const [guess2, setGuess2] = useState('');
     const [score, setScore] = useState('');
-    
+    const [gameStatus, setGameStatus] = useState('wait');
     
     //shows users the deck for a limited amount of time
     useEffect( ()=> {
@@ -34,9 +32,11 @@ export default function MatchingGame(){
             card.isFaceDown =true;
             return card;
         }))
+        // starts timer once cards are flipped
+        setGameStatus('')
        }
 
-    //uses func to check if selected cards are a match
+    //check if selected cards are a match
     useEffect( ()=>{
         if(guess2){
             cardsMatch()
@@ -80,11 +80,14 @@ export default function MatchingGame(){
 
     //stops timer
     function stopTimer(){
-        if(strikes >= 2){
-            setScore('lost')
+        if(strikes >= 3){
+            setGameStatus('lost')
         }
         else if(pairs >= 3){
-            setScore('won')
+            console.log(timer)
+            setScore(timer)
+            setGameStatus('won')
+            
             }
     }
 
@@ -118,23 +121,27 @@ export default function MatchingGame(){
         }
       });
 
+      let timer = Clock(gameStatus);
 
-      let bread = <Clock stopTimer={score}/>;
-
-    return (
+      let gameDisplay =         
+    
         <React.Fragment>   
-        <div className='strike-container'>
+
         <ShowStrikes strikes={strikes} />
-        </div>
 
         <div className='deck-container'>
         {deckDisplay }
         </div>
 
         <div>
-        {bread}
+        {timer}
         </div>
 
         </React.Fragment> 
-    )
+    
+    if (strikes >= 3){
+        gameDisplay = <div>Sorry you lost</div>
+    }
+
+    return gameDisplay;
 }
