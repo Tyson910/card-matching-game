@@ -3,15 +3,14 @@ import React from 'react';
 export default function SaveScore({score}){
 
  return(
-    <React.Fragment>
+    <div>
     <div>
     Congrats you finished in
     </div>
 
     <input type='text' id='scoreInput'
     name='score' readOnly 
-    value= '1:32 ' />
-
+    value= {score} />
 
      <div>
      Please enter a username to save your score 
@@ -20,6 +19,6 @@ export default function SaveScore({score}){
      placeholder='Username'
      />
      </div>
-     </React.Fragment>
+     </div>
  )
 }

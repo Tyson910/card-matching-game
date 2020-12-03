@@ -10,12 +10,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div>
+
+
         <MatchingGame />
-        </div>
-        <div>
-          <SaveScore />
-        </div>
+        
+
       </header>
     </div>
   );

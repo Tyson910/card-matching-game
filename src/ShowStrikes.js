@@ -17,8 +17,11 @@ export default function ShowStrikes({strikes}){
     
 
     return (
+        <React.Fragment>
+        <div>Strikes</div>
         <div className='strike-container'>
         {strikeDisplay}
         </div>
+        </React.Fragment>
     )
 }

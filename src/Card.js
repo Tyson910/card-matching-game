@@ -23,13 +23,18 @@ export default function Card({cardValue, isFaceDown, onClick}){
     }
 
     if(isFaceDown){
-        cardDisplay =<button onClick={onClick} className='card'>
-        <img src='./DECKGIF/b.gif' alt='back of playing card'/></button>
+        cardDisplay = 
+         <button onClick={onClick} className='card'>
+        <img src='./DECKGIF/b.gif' alt='back of playing card'/>
+        </button>
+        
     }
     else{    
-        cardDisplay = <button className='card' onClick={onClick} value={cardValue}>
+        cardDisplay = 
+        <button className='card' onClick={onClick} value={cardValue}>
         <img src={cardFile} alt={cardAlt}/>
         </button>
+        
     }
     return cardDisplay;
     }

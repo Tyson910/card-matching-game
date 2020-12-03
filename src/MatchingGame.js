@@ -4,6 +4,7 @@ import Card from './Card.js';
 import React from 'react';
 import ShowStrikes from './ShowStrikes.js';
 import Clock from './Timer.js';
+import SaveScore from './SaveScore.js';
 
 export default function MatchingGame(){
 
@@ -124,8 +125,7 @@ export default function MatchingGame(){
       let timer = Clock(gameStatus);
 
       let gameDisplay =         
-    
-        <React.Fragment>   
+        <React.Fragment>  
 
         <ShowStrikes strikes={strikes} />
 
@@ -137,10 +137,13 @@ export default function MatchingGame(){
         {timer}
         </div>
 
-        </React.Fragment> 
+        </React.Fragment>
     
     if (strikes >= 3){
         gameDisplay = <div>Sorry you lost</div>
+    }
+    else if(pairs >= 4){
+        gameDisplay = <SaveScore score= {score} />
     }
 
     return gameDisplay;
