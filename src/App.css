@@ -36,13 +36,26 @@ button{
 img{
   width:100%;
   height: 100%;
+  object-fit:cover;
 }
 
+
 .strike-container{
+  margin-left:45%;
+  display: grid;
+  grid-template-rows: 25% auto;
+  margin-bottom:5%;
+}
+
+.strike-display{
   display:flex;
-  width:33%;
-  height:10%;
-  margin: 2% auto 5% auto;
+  flex-flow:row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.strike{
+  margin-top: 15%;
 }
 
 .deck-container{
@@ -57,10 +70,6 @@ img{
 }
 
 .card{
-  /*
-  max-height: 103px;
-  max-width: 72px;
-  */
   min-height: 103px;
   min-width: 72px;
 }
