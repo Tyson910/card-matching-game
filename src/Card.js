@@ -1,5 +1,3 @@
-//import React from 'react';
-
 export default function Card({cardValue, isFaceDown, onClick}){
     let cardDisplay;
     let cardFile= './DECKGIF/' + cardValue + '.gif';

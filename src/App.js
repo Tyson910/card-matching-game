@@ -1,20 +1,15 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import './App.css';
-import MatchingGame from './MatchingGame.js'
-import SaveScore from './SaveScore.js'
+import Start from './Start.js'
 
 function App() {
-  const [score, setScore]= useState('');
 
   return (
     <div className="App">
       <header className="App-header">
-
-
-        <MatchingGame />
         
-
+        <Start />
+        
       </header>
     </div>
   );

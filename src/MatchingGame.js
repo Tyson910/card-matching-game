@@ -5,6 +5,8 @@ import React from 'react';
 import ShowStrikes from './ShowStrikes.js';
 import Clock from './Timer.js';
 import SaveScore from './SaveScore.js';
+import Lost from './Lost.js';
+import Start from './Start.js';
 
 export default function MatchingGame(){
 
@@ -73,7 +75,6 @@ export default function MatchingGame(){
             return card;
         }
         ))
-
         setGuess1('');
         setGuess2('');
     
@@ -121,29 +122,45 @@ export default function MatchingGame(){
           return null;
         }
       });
+      
+      
+      let timer = Clock({stopTimer:gameStatus});
 
-      let timer = Clock(gameStatus);
+      
+
 
       let gameDisplay =         
         <React.Fragment>  
 
+        <div className='widget-container'>
+        
+        <div id='timer'>
+        <div>Timer</div>
+        {timer}
+        </div>
+ 
         <ShowStrikes strikes={strikes} />
+        </div>
 
         <div className='deck-container'>
         {deckDisplay }
         </div>
 
-        <div>
-        {timer}
-        </div>
+        <button className='button-nav' id='replay-button' 
+                onClick={()=> {setGameStatus('home')}} >
+                Home Page
+                </button>
 
         </React.Fragment>
     
-    if (strikes >= 3){
-        gameDisplay = <div>Sorry you lost</div>
+    if (strikes === 3){
+        gameDisplay = < Lost />
     }
-    else if(pairs >= 4){
+    else if(pairs === 4){
         gameDisplay = <SaveScore score= {score} />
+    }
+    else if (gameStatus === 'home'){
+        gameDisplay = <Start />
     }
 
     return gameDisplay;

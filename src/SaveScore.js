@@ -3,7 +3,8 @@ import React from 'react';
 export default function SaveScore({score}){
 
  return(
-    <div>
+    <form formAction='action.php' method='POST'>
+    
     <div>
     Congrats you finished in
     </div>
@@ -14,11 +15,18 @@ export default function SaveScore({score}){
 
      <div>
      Please enter a username to save your score 
+     </div>
      <input type='text' id='usernameInput'
      name='username' required 
      placeholder='Username'
      />
-     </div>
-     </div>
+
+    <div>
+    <input type='submit' id='submmit'
+     name='submit' className='button-nav' />
+    </div>
+
+     </form>
+     
  )
 }
