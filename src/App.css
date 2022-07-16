@@ -1,3 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .container {
+    @apply max-w-screen-lg mx-auto px-10 md:px-0
+  }
+  .btn {
+      @apply text-center text-zinc-50 max-w-max p-4  
+      rounded font-semibold tracking-wider transition-colors 
+      duration-200 ease-in-out 
+  }
+}
+
+@layer utilities{
+  a {
+      @apply hover:underline
+  }
+}
 .App {
   text-align: center;
 }

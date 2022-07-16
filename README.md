@@ -11,42 +11,29 @@ The goal of the game is to match all cards with their pairs as quickly as possib
 6. The game ends when you either get 3 strikes or find every pair
 7. If you win you can add your name to our database and compare your time to other players!
 
----
-# Developers
+# create-svelte
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
-## Available Scripts
+## Developing
 
-In the project directory, you can run:
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-### `npm start`
+```bash
+npm run dev
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Building
 
-### `npm test`
+To create a production version of your app:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm run build
+```
 
-### `npm run build`
+You can preview the production build with `npm run preview`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
