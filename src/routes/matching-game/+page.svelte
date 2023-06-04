@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
 	import { onMount, beforeUpdate } from 'svelte';
 	import { createDeck } from '$lib/create-deck.js';
 	import Timer from '$components/timer.svelte';
 	import Card from '$components/card.svelte';
 	import ShowStrikes from '$components/show-strikes.svelte';
-	/** @typedef {import('$lib/create-deck.js').card} card */
-	
+	import type { Card as CardInterface } from '$lib/create-deck';
+
 	// import SaveScore from './SaveScore.js';
 	// import Lost from './Lost.js';
 	let deck = createDeck();
@@ -13,17 +13,13 @@
 	let strikes = 0;
 	let pairs = 0;
 
-	/** @type {string | null} */
-	let score = null;
+	
+	let score: string | null = null;
+	let guessOne: CardInterface | null = null;
+	let guessTwo: CardInterface | null = null;
 
-	/** @type {card | null} */
-	let guessOne = null;
-
-	/** @type {card | null} */
-	let guessTwo = null;
-
-	/** @type {'lost' | 'won' | 'started' | null }  */
-	let gameStatus = null;
+	type GameStatus = 'lost' | 'won' | 'started' | null;
+	let gameStatus: GameStatus  = null;
 
 	//shows all cards in deck
 	function flipAllCardsDown() {
