@@ -135,25 +135,25 @@ export class MatchingGameMachine {
 		//resets selection and saves number of pairs if match
 		if (this.guessOne.cardValue === this.guessTwo.cardValue) {
 			this.pairs += 1;
+			this.guessOne = null;
+			this.guessTwo = null;
 		} else {
 			this.strikes += 1;
 			//lets user see wrong choices for a short time before flipping
 			const showPicks = setTimeout(() => {
 				// flip cards down
-				this.deck = this.deck.map((card) => {
+				this.deck.forEach((card) => {
 					if (card.cardId == this.guessOne?.cardId || card.cardId == this.guessTwo?.cardId) {
 						card.isFaceDown = true;
 					}
-					return card;
 				});
+				this.guessOne = null;
+				this.guessTwo = null;
 			}, 1400);
 			return function cleanup() {
 				clearTimeout(showPicks);
 			};
 		}
-
-		this.guessOne = null;
-		this.guessTwo = null;
 	}
 
 	/** Saves card info upon click */
@@ -165,7 +165,6 @@ export class MatchingGameMachine {
 			this.guessTwo = guessInput;
 		}
 
-
 		// flip users guess card face up
 		this.deck.forEach((card) => {
 			if (card.cardId == guessInput.cardId) {
@@ -173,6 +172,6 @@ export class MatchingGameMachine {
 			}
 		});
 
-    this.checkIfCardsMatch()
+		this.checkIfCardsMatch();
 	}
 }
