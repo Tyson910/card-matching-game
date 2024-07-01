@@ -1,45 +1,18 @@
-<script>
-	/**
-	 * @typedef {import('$lib/create-deck.js').card} card
-	 */
-	/** @type {card} */
-	export let card;
+<script lang="ts">
+	import type { CardInterface } from '$lib/game.svelte.ts';
 
-	$: isFaceDown = card.isFaceDown;
+	let { card, onClick }: { card: CardInterface; onClick: (value: CardInterface) => void } =
+		$props();
 
-	/** @type {svelte.JSX.MouseEventHandler<HTMLButtonElement>} */
-	export let onClick;
-
-	/** @type {string} */
-	let cardFile = './DECKGIF/' + card.cardValue + '.gif';
-
-	/** @returns {string} */
-	const getCardNameStr = (/** @type {string} */ cardValue) => {
-		switch (cardValue.slice(-1)) {
-			case 'h':
-				return parseInt(cardValue) + ' of hearts';
-				break;
-			case 's':
-				return parseInt(cardValue) + ' of spades';
-				break;
-			case 'd':
-				return parseInt(cardValue) + ' of diamonds';
-				break;
-			case 'c':
-				return parseInt(cardValue) + ' of clubs';
-				break;
-			default:
-				return null;
-		}
-	};
+	const cardFile = $derived('./DECKGIF/' + card.cardValue + '.gif');
 </script>
 
-{#if isFaceDown}
-	<button on:click={() => onClick(card)} class="card">
+{#if !card.isFaceDown}
+	<button onclick={() => onClick(card.cardId)} class="card">
 		<img src="./DECKGIF/b.gif" alt="back of playing card" />
 	</button>
 {:else}
 	<button class="card" value={card.cardValue}>
-		<img src={cardFile} alt={getCardNameStr(card.cardValue)} />
+		<img src={cardFile} alt={card.cardName} />
 	</button>
 {/if}

@@ -1,9 +1,9 @@
-<script>
-	export let strikes = 0;
+<script lang="ts">
+	let { strikes }: { strikes: number } = $props();
 </script>
 
 <div class="flex max-w-lg items-center">
-	<p class="lg:text-2xl">Strikes: </p>
+	<p class="lg:text-2xl">Strikes:</p>
 	{#each Array(strikes) as _, index (index)}
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

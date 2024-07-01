@@ -1,13 +1,13 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
-	/** @type { Boolean } */
-	export let stopTimer;
 
-	/** @type { NodeJS.Timer } */
-	let interval;
+	
+	let { stopTimer }: { stopTimer: boolean } = $props();
 
-	let minutes = 0;
-	let seconds = 0;
+	let interval: number;
+
+	let minutes = $state(0);
+	let seconds = $state(0);
 
 	onMount(() => {
 		interval = setInterval(() => {

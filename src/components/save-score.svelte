@@ -1,6 +1,6 @@
-<script>
-	/** @type {string} - time it took user to find all matches */
-	export let score;
+<script lang="ts">
+	/**  time it took user to find all matches */
+	let { score }: { score: string } = $props();
 </script>
 
 <!-- Write to a DB? -->
